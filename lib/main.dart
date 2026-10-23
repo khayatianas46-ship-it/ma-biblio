@@ -1,8 +1,9 @@
-
+import 'widgets/livre_tile.dart';
 import 'package:flutter/material.dart';
 import 'models/livres.dart';
 import 'data/livres_data.dart';
 import 'screens/parametres_screen.dart';
+import 'screens/catalogue_screen.dart';
 
 void main() {
   runApp(const MaBiblioApp());
@@ -39,17 +40,17 @@ class _HomePageState extends State<HomePage> {
         title: const Text('MaBiblio'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings),
-            tooltip: 'Paramètres',
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ParametresScreen(),
-                ),
-              );
-            },
-          ),
+  icon: const Icon(Icons.library_books),
+  tooltip: 'Catalogue',
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const CatalogueScreen(),
+      ),
+    );
+  },
+),
         ],
       ),
       body: ListView(
