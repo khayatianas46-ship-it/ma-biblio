@@ -1,5 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'models/livres.dart';
+import 'data/livres_data.dart';
+import 'screens/parametres_screen.dart';
 
 void main() {
   runApp(const MaBiblioApp());
@@ -34,10 +37,53 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('MaBiblio'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            tooltip: 'Paramètres',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ParametresScreen(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
-      body: const Center(
-        child: Text('Bienvenue dans MaBiblio !'),
+      body: ListView(
+        children: livres.take(3).map((livre) {
+          return livreTile(livre);
+        }).toList(),
       ),
     );
   }
+}
+
+Widget livreTile(Livres livre) {
+  return ListTile(
+    leading: CircleAvatar(
+      backgroundColor: livre.couleur,
+      child: Text(
+        livre.titre[0],
+        style: const TextStyle(
+          color: Colors.white,
+        ),
+      ),
+    ),
+    title: Text(livre.titre),
+    subtitle: Text('${livre.auteur} – ${livre.annee}'),
+    trailing: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(livre.note.toString()),
+        const SizedBox(width: 4),
+        const Icon(
+          Icons.star,
+          color: Colors.amber,
+        ),
+      ],
+    ),
+  );
 }
